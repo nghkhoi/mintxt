@@ -1,1 +1,6 @@
-{"name":"Mintxt","display":"standalone","background-color":"#202b38","theme-color":"#202b38"}
+{
+  "name": "Mintxt",
+  "display": "standalone",
+  "background-color": "#202b38",
+  "theme-color": "#202b38"
+}
