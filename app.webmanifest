@@ -15,7 +15,7 @@
     }
   ],
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/mintxt/",
   "display": "standalone",
   "background_color": "#202b38",
   "theme_color": "#202b38",
