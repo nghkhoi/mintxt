@@ -1,5 +1,10 @@
 const txtEditor = document.querySelector('.textedit');
 
+// To add a new toolbar button:
+// In HTML: add a new <button> element with id as 'btnFunction'.
+// In JS: add a normal function with name as 'btnFunction_Action' and a parameter for <textarea> element.
+// The code below will automatically bind the action function with corresponding function.
+
 const toolbarButtonList = document.querySelectorAll("[id^='btn']");
 
 for (const toolbarButton of toolbarButtonList) {
@@ -7,10 +12,10 @@ for (const toolbarButton of toolbarButtonList) {
   toolbarButton.onclick = () => { window[buttonActionName](txtEditor) };
 }
 
-// To add a new toolbar button:
-// In HTML: add a new <button> element with id as 'btnFunction'.
-// In JS: add a normal function with name as 'btnFunction_Action' and a parameter for <textarea> element.
-// The code above will automatically bind the action function with corresponding function.
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
 
 // Auto-save functionality
 if(localStorage.getItem('text_content'))
