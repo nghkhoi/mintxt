@@ -20,14 +20,20 @@ setInterval(function() {
   localStorage.setItem('text_content', txtEditor.value);
 }, 3000);
 
+// Get shared text from other app if avaiable
+window.addEventListener('DOMContentLoaded', () => {
+  const parsedUrl = new URL(window.location);
+  txtEditor.value = parsedUrl.searchParams.get('text') ?? '';
+});
+
 // Prevent accidental unload
-window.onbeforeunload = e => {
+window.addEventListener('beforeunload', (e) => {
   if (txtEditor.value === '') delete e.returnValue;
   else {
     e.preventDefault();
     e.returnValue = '';
   }
-};
+});
 
 function btnClear_Action(tx) {
   tx.value = '';

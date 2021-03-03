@@ -17,5 +17,15 @@
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#202b38",
-  "theme_color": "#202b38"
+  "theme_color": "#202b38",
+  "share_target": {
+    "action": "index.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
