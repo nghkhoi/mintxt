@@ -10,7 +10,6 @@ self.addEventListener('install', function(e) {
         '/mintxt/script.js',
         '/mintxt/style.css',
         '/mintxt/app.webmanifest',
-        '/mintxt/icons/',
         '/mintxt/icons/android-chrome-192x192.png',
         '/mintxt/icons/android-chrome-512x512.png',
         '/mintxt/icons/apple-touch-icon.png',
@@ -28,7 +27,7 @@ self.addEventListener('fetch', function(e) {
 
 function fromCache(request) {
   return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
+    return cache.match(request, { ignoreSearch: true }).then(function (matching) {
       return matching || Promise.reject('no-match');
     });
   });
