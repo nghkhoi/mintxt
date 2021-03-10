@@ -21,9 +21,11 @@ self.addEventListener('install', function(e) {
  });
  
  self.addEventListener('fetch', function(e) {
-   e.respondWith(async function(request) {
-     const cache = await caches.open(CACHE);
-     const response = await cache.match(request);
-     return response || Promise.reject('no-match');
+   e.respondWith(function(request) {
+     return caches.open(CACHE).then(function(cache) {
+      return cache.match(e.request).then(function(response) {
+        return response || Promise.reject('no-match');
+      });
+     });
     });
  });
