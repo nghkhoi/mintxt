@@ -1,5 +1,5 @@
 //Basic asset-caching
-var CACHE='mintxt-cache'
+var CACHE='mintxt-cache';
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
