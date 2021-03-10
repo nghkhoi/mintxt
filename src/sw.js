@@ -1,7 +1,9 @@
 //Basic asset-caching
+var CACHE='mintxt-cache'
+
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('video-store').then(function(cache) {
+    caches.open(CACHE).then(function(cache) {
       return cache.addAll([
         '/mintxt/index.html',
         '/mintxt/script.js',
@@ -19,9 +21,9 @@ self.addEventListener('install', function(e) {
  });
  
  self.addEventListener('fetch', function(e) {
-   e.respondWith(
-     caches.match(e.request).then(function(response) {
-       return response || fetch(e.request);
-     })
-   );
+   e.respondWith(async function(request) {
+     const cache = await caches.open(CACHE);
+     const response = await cache.match(request);
+     return response || Promise.reject('no-match');
+    });
  });
