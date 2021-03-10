@@ -10,7 +10,6 @@ self.addEventListener('install', function(e) {
         '/mintxt/script.js',
         '/mintxt/style.css',
         '/mintxt/app.webmanifest',
-        '/mintxt/icons/',
         '/mintxt/icons/android-chrome-192x192.png',
         '/mintxt/icons/android-chrome-512x512.png',
         '/mintxt/icons/apple-touch-icon.png',
