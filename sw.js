@@ -20,12 +20,14 @@ self.addEventListener('install', function(e) {
   );
  });
  
- self.addEventListener('fetch', function(e) {
-   e.respondWith(function(request) {
-     return caches.open(CACHE).then(function(cache) {
-      return cache.match(e.request).then(function(response) {
-        return response || Promise.reject('no-match');
-      });
-     });
+self.addEventListener('fetch', function(e) {
+  e.respondWith(fromCache(e.request));
+});
+
+function fromCache(request) {
+  return caches.open(CACHE).then(function (cache) {
+    return cache.match(request).then(function (matching) {
+      return matching || Promise.reject('no-match');
     });
- });
+  });
+}
