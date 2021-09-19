@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
   <link rel="manifest" href="app.webmanifest">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <title>Mintxt</title>
 </head>
 
@@ -30,9 +31,14 @@
       <button type="button" class="toolbar__button" id="btnCopy" title="Copy">⧉</button>
       <button type="button" class="toolbar__button" id="btnPaste" title="Paste">📋</button>
       <button type="button" class="toolbar__button" id="btnWrap" title="Toggle Wrap">⥻</button>
+      <button type="button" class="toolbar__button" id="btnStatusBar" title="Toggle Status bar">‗</button>
     </div>
 
     <textarea class="textedit" autofocus></textarea>
+
+    <div class="toolbar toolbar--status-bar">
+      <div class="toolbar__info" id="infoWordCount" title="Word count">0w 0ch</div>
+    </div>
   </main>
 
   <script defer src="script.js"></script>

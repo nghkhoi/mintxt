@@ -1,4 +1,6 @@
 const txtEditor = document.querySelector('.textedit');
+const statusBar = document.querySelector('.toolbar--status-bar');
+const infoWordCount = document.querySelector('#infoWordCount');
 
 // To add a new toolbar button:
 // In HTML: add a new <button> element with id as 'btnFunction'.
@@ -33,6 +35,14 @@ window.addEventListener('DOMContentLoaded', () => {
     txtEditor.value = textParam;
 });
 
+// Dynamically update word count on text input
+txtEditor.addEventListener('keyup', (e) => {
+  let text = e.target.value;
+  let noWord = _.size(_.words(text));
+  let noChar = text.length;
+  infoWordCount.innerHTML = `${noWord}w ${noChar}c`;
+});
+
 function btnClear_Action(tx) {
   tx.value = '';
   tx.focus();
@@ -65,6 +75,10 @@ function btnPaste_Action (tx) {
 
 function btnWrap_Action (tx) {
   tx.wrap = tx.wrap === 'off' ? 'soft' : 'off';
+}
+
+function btnStatusBar_Action (tx) {
+  statusBar.style.display = (statusBar.style.display === 'none' ? 'flex' : 'none');
 }
 
 function btnQuote_Action(tx) {
