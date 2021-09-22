@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // Dynamically update word count on text input
 txtEditor.addEventListener('keyup', (e) => {
   let text = e.target.value;
-  let noWord = _.size(_.words(text));
+  let noWord = text.match(/\S+/g).length;  // Alternative: /\w+/g
   let noChar = text.length;
   infoWordCount.innerHTML = `${noWord}w ${noChar}c`;
 });
