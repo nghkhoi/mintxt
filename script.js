@@ -36,24 +36,22 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Dynamically update word count on text input
-txtEditor.addEventListener('keyup', (e) => {
-  let text = e.target.value;
-  let noWord = text.match(/\S+/g).length;  // Alternative: /\w+/g
-  let noChar = text.length;
-  infoWordCount.innerHTML = `${noWord}w ${noChar}c`;
-});
+txtEditor.addEventListener('input', (e) => updateWordCount(txtEditor, infoWordCount));
 
 function btnClear_Action(tx) {
   tx.value = '';
   tx.focus();
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnUndo_Action (tx) {
   document.execCommand('undo');
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnRedo_Action (tx) {
   document.execCommand('redo');
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnCopy_Action (tx) {
@@ -70,6 +68,7 @@ function btnPaste_Action (tx) {
       tx.value = old.slice(0, selStart) + clip + old.slice(selEnd);
       tx.setSelectionRange(selStart, selStart !== selEnd ? selStart + clip.length : selEnd);
       tx.focus();
+      updateWordCount(txtEditor, infoWordCount);
     });
 }
 
@@ -83,14 +82,17 @@ function btnStatusBar_Action (tx) {
 
 function btnQuote_Action(tx) {
   insertText (tx, '“', '”');
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnEnDash_Action(tx) {
   insertText (tx, '–');
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnEmDash_Action(tx) {
   insertText (tx, '—');
+  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnJapaneseLongVowel_Action(tx) {
@@ -157,6 +159,13 @@ function btnLowerCase_Action(tx) {
   tx.value = old.slice(0, selStart) + old.slice(selStart, selEnd).toLowerCase() + old.slice(selEnd);
   tx.setSelectionRange(selStart, selEnd);
   tx.focus();
+}
+
+function updateWordCount (tx, info) {
+  let text = tx.value;
+  let noWord = text.match(/\S+/g)?.length || 0;  // Alternative: /\w+/g
+  let noChar = text.length;
+  info.innerHTML = `${noWord}w ${noChar}c`;
 }
 
 function insertText(tx, openText, closeText) {
