@@ -39,9 +39,12 @@ window.addEventListener('DOMContentLoaded', () => {
 txtEditor.addEventListener('input', (e) => updateWordCount(txtEditor, infoWordCount));
 
 function btnClear_Action(tx) {
-  tx.value = '';
+  if (tx.value.trim().length > 0 && window.confirm("Do you really want to clear all content?"))
+  {
+    tx.value = '';
+    updateWordCount(txtEditor, infoWordCount);
+  }
   tx.focus();
-  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnUndo_Action (tx) {
