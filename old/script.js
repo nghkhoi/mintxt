@@ -35,28 +35,6 @@ window.addEventListener('DOMContentLoaded', () => {
     txtEditor.value = textParam;
 });
 
-// Dynamically update word count on text input
-txtEditor.addEventListener('input', (e) => updateWordCount(txtEditor, infoWordCount));
-
-function btnClear_Action(tx) {
-  if (tx.value.trim().length > 0 && window.confirm("Do you really want to clear all content?"))
-  {
-    tx.value = '';
-    updateWordCount(txtEditor, infoWordCount);
-  }
-  tx.focus();
-}
-
-function btnUndo_Action (tx) {
-  document.execCommand('undo');
-  updateWordCount(txtEditor, infoWordCount);
-}
-
-function btnRedo_Action (tx) {
-  document.execCommand('redo');
-  updateWordCount(txtEditor, infoWordCount);
-}
-
 function btnCopy_Action (tx) {
   if (tx.value.trim().length > 0)
     navigator.clipboard.writeText(tx.value);
@@ -81,21 +59,6 @@ function btnWrap_Action (tx) {
 
 function btnStatusBar_Action (tx) {
   statusBar.style.display = (statusBar.style.display === 'none' ? 'flex' : 'none');
-}
-
-function btnQuote_Action(tx) {
-  insertText (tx, '“', '”');
-  updateWordCount(txtEditor, infoWordCount);
-}
-
-function btnEnDash_Action(tx) {
-  insertText (tx, '–');
-  updateWordCount(txtEditor, infoWordCount);
-}
-
-function btnEmDash_Action(tx) {
-  insertText (tx, '—');
-  updateWordCount(txtEditor, infoWordCount);
 }
 
 function btnJapaneseLongVowel_Action(tx) {
@@ -164,28 +127,28 @@ function btnLowerCase_Action(tx) {
   tx.focus();
 }
 
-function updateWordCount (tx, info) {
-  let text = tx.value;
-  let noWord = text.match(/\S+/g)?.length || 0;  // Alternative: /\w+/g
-  let noChar = text.length;
-  info.innerHTML = `${noWord}w ${noChar}c`;
-}
+// function updateWordCount (tx, info) {
+//   let text = tx.value;
+//   let noWord = text.match(/\S+/g)?.length || 0;  // Alternative: /\w+/g
+//   let noChar = text.length;
+//   info.innerHTML = `${noWord}w ${noChar}c`;
+// }
 
-function insertText(tx, openText, closeText) {
-  // If supplied just one: insert {openText}.
-  // If supplied both: insert or wrap with both.
+// function insertText(tx, openText, closeText) {
+//   // If supplied just one: insert {openText}.
+//   // If supplied both: insert or wrap with both.
  
-  let selStart = tx.selectionStart;
-  let selEnd = tx.selectionEnd;
-  let old = tx.value;
+//   let selStart = tx.selectionStart;
+//   let selEnd = tx.selectionEnd;
+//   let old = tx.value;
  
-  if (closeText === undefined) closeText = '';
+//   if (closeText === undefined) closeText = '';
  
-  tx.value = old.slice(0, selStart)
-              + openText + old.slice(selStart, selEnd) + closeText
-              + old.slice(selEnd);
+//   tx.value = old.slice(0, selStart)
+//               + openText + old.slice(selStart, selEnd) + closeText
+//               + old.slice(selEnd);
 
-  tx.setSelectionRange(selStart + openText.length, selEnd + openText.length);
+//   tx.setSelectionRange(selStart + openText.length, selEnd + openText.length);
 
-  tx.focus();
-}
+//   tx.focus();
+// }

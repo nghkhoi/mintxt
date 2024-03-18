@@ -81,7 +81,7 @@ const Page: React.FC = () => {
       start--;
     }
   
-    const selectedText = text.substring(start, end);
+    const selectedText = text.slice(start, end);
   
     if (selectedText.length === 1) {
       const selectedChar = selectedText.charAt(0);
@@ -127,6 +127,7 @@ const Page: React.FC = () => {
     const newText = closeText ? `${openText}${selectedText}${closeText}` : openText;
     const updatedText = text.slice(0, selectionStart) + newText + text.slice(selectionEnd);
     setText(updatedText);
+    updateCounts(updatedText);
     setSelectionStart(selectionStart + openText.length);
     setSelectionEnd(selectionStart + openText.length);
   };
